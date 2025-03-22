@@ -3,8 +3,7 @@
 import { useState } from "react";
 import CategoryTagList from "@/components/category/CategoryTagList";
 import { mockPhotos } from "@/data/photo";
-import { Photo } from "@/types/photo";
-import PhotoList from "@/components/photo/PhotoList";
+import PhotoViewer from "@/components/photo/PhotoViewer";
 
 const availableTags = [
   "Portrait",
@@ -19,9 +18,6 @@ const availableTags = [
 
 export default function HomePage() {
   const [selectedTag, setSelectedTag] = useState("Portrait");
-  const filteredPhotos: Photo[] = mockPhotos.filter((photo) =>
-    photo.tags.includes(selectedTag)
-  );
 
   return (
     <div className="p-4 w-full max-w-md">
@@ -35,7 +31,7 @@ export default function HomePage() {
       {/* 今後のパーツ */}
       <div className="mt-4">
         <h1 className="text-xl font-bold">#{selectedTag}</h1>
-        <PhotoList photos={filteredPhotos} />
+        <PhotoViewer photos={mockPhotos} />
       </div>
     </div>
   );
