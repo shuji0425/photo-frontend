@@ -25,15 +25,15 @@ export default function PhotoViewer({ photos }: Props) {
         onNext={() => setCurrentIndex((prev) => (prev + 1) % photos.length)}
       />
 
-      {/* 詳細情報 */}
-      <PhotoDetails photo={currentPhoto} />
-
       {/* サムネイル一覧 */}
       <PhotoThumbnailList
         photos={photos}
         currentIndex={currentIndex}
         onSelect={(index) => setCurrentIndex(index)}
       />
+
+      {/* 詳細情報 */}
+      <PhotoDetails photo={currentPhoto} />
     </div>
   );
 }
