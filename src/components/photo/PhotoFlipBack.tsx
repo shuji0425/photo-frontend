@@ -21,13 +21,7 @@ export default function PhotoFlipBack({ photo }: { photo: Photo }) {
                 height: "auto",
               }}
             >
-              <div
-                className="w-full h-full flex flex-col justify-center items-center
-                           text-center text-gray-800 p-5
-                           bg-sky-50 backdrop-blur-md
-                           shadow-lg ring-1 ring-gray-200/50
-                           transition-all duration-300 ease-in-out"
-              >
+              <div className="w-full h-full flex flex-col justify-center items-center text-center text-gray-800 bg-sky-50 shadow-lg">
                 {photo.title && (
                   <h2 className="text-xl font-semibold tracking-wide text-gray-900 mb-2">
                     {photo.title}
