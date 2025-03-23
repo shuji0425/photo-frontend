@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { Photo } from "@/types/photo";
 import PhotoMainView from "./PhotoMainView";
-import PhotoDetails from "./PhotoDetails";
+// import PhotoDetails from "./PhotoDetails";
 import PhotoThumbnailList from "./PhotoThumbnailList";
 
 type Props = {
@@ -15,7 +15,7 @@ export default function PhotoViewer({ photos }: Props) {
   const currentPhoto = photos[currentIndex];
 
   return (
-    <div className="space-y-4">
+    <div className="w-full h-full flex flex-col overflow-hidden">
       {/* メイン画像スライド表示 */}
       <PhotoMainView
         photo={currentPhoto}
@@ -26,14 +26,16 @@ export default function PhotoViewer({ photos }: Props) {
       />
 
       {/* サムネイル一覧 */}
-      <PhotoThumbnailList
-        photos={photos}
-        currentIndex={currentIndex}
-        onSelect={(index) => setCurrentIndex(index)}
-      />
+      <div className="shrink-0 overflow-x-auto px-2 py-1">
+        <PhotoThumbnailList
+          photos={photos}
+          currentIndex={currentIndex}
+          onSelect={(index) => setCurrentIndex(index)}
+        />
+      </div>
 
       {/* 詳細情報 */}
-      <PhotoDetails photo={currentPhoto} />
+      {/* <PhotoDetails photo={currentPhoto} /> */}
     </div>
   );
 }

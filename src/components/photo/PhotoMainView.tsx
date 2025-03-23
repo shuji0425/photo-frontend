@@ -36,7 +36,7 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
   return (
     <div
       {...handlers}
-      className="relative w-full aspect-[2/3] bg-gray-100 rounded-xl overflow-hidden select-none"
+      className="relative w-full aspect-[2/3] bg-gray-100 overflow-hidden select-none shadow-lg"
       style={{
         touchAction: "pan-y",
       }}
@@ -56,7 +56,7 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
             src={photo.url}
             alt={photo.title ?? ""}
             fill
-            className="object-contain"
+            className="object-contain p-1"
             sizes="(max-width: 768px) 100vw, 400px"
           />
         </motion.div>

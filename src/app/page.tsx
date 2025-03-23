@@ -4,6 +4,7 @@ import { useState } from "react";
 import CategoryTagList from "@/components/category/CategoryTagList";
 import { mockPhotos } from "@/data/photo";
 import PhotoViewer from "@/components/photo/PhotoViewer";
+import Header from "@/components/layout/Header";
 // import PhotoStackView from "@/components/photo/PhotoStackView";
 
 const availableTags = [
@@ -21,17 +22,23 @@ export default function HomePage() {
   const [selectedTag, setSelectedTag] = useState("Portrait");
 
   return (
-    <div className="p-4 w-full max-w-md">
-      {/* カテゴリータグ */}
-      <CategoryTagList
-        tags={availableTags}
-        selectedTag={selectedTag}
-        onTagSelect={setSelectedTag}
-      />
+    <div className="h-screen w-screen max-w-full flex flex-col overflow-hidden bg-white">
+      {/* ヘッダー */}
+      <Header />
 
-      {/* 今後のパーツ */}
-      <div className="mt-4">
-        <h1 className="text-xl font-bold">#{selectedTag}</h1>
+      {/* カテゴリータグ */}
+      <div className="shrink-0 w-full overflow-x-auto">
+        <div className="flex gap-2 w-max">
+          <CategoryTagList
+            tags={availableTags}
+            selectedTag={selectedTag}
+            onTagSelect={setSelectedTag}
+          />
+        </div>
+      </div>
+
+      {/* メインビュー */}
+      <div className="flex-1 min-h-0 overflow-hidden">
         <PhotoViewer photos={mockPhotos} />
       </div>
     </div>
