@@ -33,9 +33,6 @@ export default function PhotoViewer({ photos }: Props) {
           onSelect={(index) => setCurrentIndex(index)}
         />
       </div>
-
-      {/* 詳細情報 */}
-      {/* <PhotoDetails photo={currentPhoto} /> */}
     </div>
   );
 }

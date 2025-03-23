@@ -20,6 +20,9 @@ const availableTags = [
 
 export default function HomePage() {
   const [selectedTag, setSelectedTag] = useState("Portrait");
+  const filteredPhotos = mockPhotos.filter((photo) =>
+    photo.tags.includes(selectedTag)
+  );
 
   return (
     <div className="h-screen w-screen max-w-full flex flex-col overflow-hidden bg-white">
@@ -39,7 +42,13 @@ export default function HomePage() {
 
       {/* メインビュー */}
       <div className="flex-1 min-h-0 overflow-hidden">
-        <PhotoViewer photos={mockPhotos} />
+        {filteredPhotos.length > 0 ? (
+          <PhotoViewer photos={filteredPhotos} />
+        ) : (
+          <div className="flex items-center justify-center h-full text-gray-400">
+            該当する写真が見つかりませんでした。
+          </div>
+        )}
       </div>
     </div>
   );

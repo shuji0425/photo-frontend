@@ -1,5 +1,7 @@
 import type { Photo } from "@/types/photo";
 import PhotoCardFrame from "./PhotoCardFrame";
+import PhotoDetails from "./PhotoDetails";
+import Link from "next/link";
 
 export default function PhotoFlipBack({ photo }: { photo: Photo }) {
   const ratio = photo.width / photo.height;
@@ -21,28 +23,17 @@ export default function PhotoFlipBack({ photo }: { photo: Photo }) {
                 height: "auto",
               }}
             >
-              <div className="w-full h-full flex flex-col justify-center items-center text-center text-gray-800 bg-sky-50 shadow-lg">
-                {photo.title && (
-                  <h2 className="text-xl font-semibold tracking-wide text-gray-900 mb-2">
-                    {photo.title}
-                  </h2>
-                )}
-                {/* {photo.location && (
-                <p className="text-xs mb-1 text-gray-600">📍 {photo.location}</p>
-              )}
-              {photo.date && (
-                <p className="text-xs mb-2 text-gray-600">📅 {photo.date}</p>
-              )}
-              {photo.description && (
-                <p className="text-sm mb-3 leading-relaxed">{photo.description}</p>
-              )} */}
-                <a
-                  href={`#/photo/${photo.id}`}
-                  className="text-blue-600 hover:text-blue-800 underline text-sm"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  詳細を見る →
-                </a>
+              <div className="w-full h-full flex flex-col justify-between text-center bg-sky-50 shadow-lg py-2">
+                <PhotoDetails photo={photo} />
+                <div>
+                  <Link
+                    href={`/photo/${photo.id}`}
+                    className="text-blue-600 hover:text-blue-800 underline text-sm"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    詳細を見る
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
