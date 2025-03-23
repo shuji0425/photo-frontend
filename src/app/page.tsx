@@ -4,6 +4,7 @@ import { useState } from "react";
 import CategoryTagList from "@/components/category/CategoryTagList";
 import { mockPhotos } from "@/data/photo";
 import PhotoViewer from "@/components/photo/PhotoViewer";
+// import PhotoStackView from "@/components/photo/PhotoStackView";
 
 const availableTags = [
   "Portrait",

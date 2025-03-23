@@ -5,6 +5,10 @@ import { useSwipeable } from "react-swipeable";
 import type { Photo } from "@/types/photo";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  photoSlideVariants,
+  photoSlideTransition,
+} from "@/animations/photoSlide";
 
 type Props = {
   photo: Photo;
@@ -18,31 +22,16 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
-      setDirection("right");
+      setDirection("left");
       onNext();
     },
     onSwipedRight: () => {
-      setDirection("left");
+      setDirection("right");
       onPrev();
     },
     trackTouch: true,
     touchEventOptions: { passive: false },
   });
-
-  const variants = {
-    enter: (dir: string) => ({
-      x: dir === "left" ? 300 : -300,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (dir: string) => ({
-      x: dir === "left" ? -300 : 300,
-      opacity: 0,
-    }),
-  };
 
   return (
     <div
@@ -55,12 +44,12 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
       <AnimatePresence custom={direction}>
         <motion.div
           key={photo.id}
-          variants={variants}
+          variants={photoSlideVariants}
           custom={direction}
           initial="enter"
           animate="center"
           exit="exit"
-          transition={{ duration: 0.4 }}
+          transition={photoSlideTransition}
           className="absolute inset-0"
         >
           <Image
