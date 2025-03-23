@@ -23,9 +23,12 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [flipped, setFlipped] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+  const [showHint, setShowHint] = useState(true);
 
   useEffect(() => {
     setHasMounted(true);
+    const timer = setTimeout(() => setShowHint(false), 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handlers = useSwipeable({
@@ -55,6 +58,14 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
         touchAction: "pan-y",
       }}
     >
+      {showHint && (
+        <div
+          className="absolute top-2 left-1/2 -translate-x-1/2 bg-white/80 text-gray-600 text-xs px-3 py-1 rounded shadow z-10 transition-opacity duration-500 opacity-100"
+          style={{ opacity: showHint ? 1 : 0 }}
+        >
+          💡 ダブルタップで裏面へ
+        </div>
+      )}
       <AnimatePresence custom={direction}>
         <motion.div
           key={photo.id}
@@ -64,7 +75,7 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
           animate="center"
           exit="exit"
           transition={photoSlideTransition}
-          className="absolute inset-0"
+          className="absolute inset-0 px-1"
         >
           {/* フリップ用ラッパー */}
           <div
@@ -76,8 +87,8 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
             }}
           >
             {/* 表面: 写真 */}
-            <div className="backface-hidden">
-              <PhotoCardFrame>
+            <PhotoCardFrame>
+              <div className="backface-hidden">
                 <Image
                   src={photo.url}
                   alt={photo.title ?? ""}
@@ -85,8 +96,8 @@ export default function PhotoMainView({ photo, onPrev, onNext }: Props) {
                   className="object-contain p-1"
                   sizes="(max-width: 768px) 100vw, 400px"
                 />
-              </PhotoCardFrame>
-            </div>
+              </div>
+            </PhotoCardFrame>
 
             {/* 裏面: 説明 */}
             <PhotoFlipBack photo={photo} />
